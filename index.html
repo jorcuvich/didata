@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>didata.dev - em breve</title>
+<title>didata.dev</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -53,6 +53,7 @@
     position: relative;
   }
 
+  /* ambient grid + floating dots background */
   .bg-grid{
     position: fixed; inset: 0;
     background-image:
@@ -166,6 +167,7 @@
     padding: 1px 7px; border-radius:6px; color: var(--io); font-size:.9em;
   }
 
+  /* ---------- FLOWCHART ---------- */
   .flow-wrap{
     max-width: 620px; margin: 0 auto 30px;
     padding: 20px 12px 4px;
@@ -290,6 +292,7 @@
     .loop-badge{ display:none; }
   }
 
+  /* ---------- CONSOLE ---------- */
   .console-wrap{
     max-width: 620px; margin: 0 auto 60px;
     opacity:0; animation: rise .8s .65s ease forwards;
@@ -345,11 +348,11 @@
 
 <main>
   <section class="hero">
-    <div class="eyebrow">SISTEMA EM DESENVOLVIMENTO <span class="cursor"></span></div>
-    <h1>Em breve, <span class="accent">novidades</span>.</h1>
+    <div class="eyebrow">PLATAFORMA DE ENSINO DE PROGRAMAÇÃO <span class="cursor"></span></div>
+    <h1>Aprenda lógica vendo o <span class="accent">código pensar</span>.</h1>
     <p class="sub">
-      Estamos montando o fluxograma bloco por bloco, conexão por conexão.
-      Por enquanto, o programa roda em <code>loop</code>, mas o próximo passo já está desenhado.
+      Fluxogramas que executam de verdade, pra ensinar programação do jeito que faz sentido:
+      passo a passo, bloco a bloco. <code>Em breve</code>, um novo jeito de aprender (e de ensinar).
     </p>
   </section>
 
@@ -369,19 +372,19 @@
       </div>
 
       <div class="row">
-        <div class="node process" id="nProcess">⚙️ PROCESSO<small>compilando ideias...</small><div class="port"></div></div>
+        <div class="node process" id="nProcess">⚙️ PROCESSO<small>preparando aula de lógica...</small><div class="port"></div></div>
       </div>
 
       <div class="row" style="margin-bottom:60px;">
-        <div class="node decision" id="nDecision">❓ pronto_para_lançar?<small>V → segue · F → repete</small><div class="port"></div>
-          <span class="loop-badge">↺ loop ativo</span>
+        <div class="node decision" id="nDecision">❓ aluno_entendeu_o_conceito?<small>V → avança · F → revisa</small><div class="port"></div>
+          <span class="loop-badge">↺ reforçando</span>
         </div>
       </div>
 
       <div class="row branch">
-        <div class="node io" id="nIoFalse">🖥️ "ainda não, mas em breve 🚀"</div>
-        <div class="node io dim" id="nIoTrue">🖥️ "novidades no ar!"
-          <span class="lock-badge">🔒 aguardando</span>
+        <div class="node io" id="nIoFalse">🖥️ "vamos revisar juntos! 📘"</div>
+        <div class="node io dim" id="nIoTrue">🖥️ "prontinho pro próximo desafio! 🎉"
+          <span class="lock-badge">🔒 em breve</span>
         </div>
       </div>
 
@@ -400,18 +403,20 @@
 </main>
 
 <footer>
-  didata.dev · <span id="year"></span>
+  didata.dev — ensinando programação, um fluxograma <span class="heart">♥</span> por vez · <span id="year"></span>
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// theme toggle
 const btn = document.getElementById('themeToggle');
 btn.addEventListener('click', () => {
   document.documentElement.classList.toggle('light');
   btn.textContent = document.documentElement.classList.contains('light') ? '☀️' : '🌙';
 });
 
+// ambient floating particles
 const bg = document.querySelector('.bg-grid');
 for(let i=0;i<26;i++){
   const p = document.createElement('div');
@@ -423,11 +428,12 @@ for(let i=0;i<26;i++){
   document.body.appendChild(p);
 }
 
+// execution loop: highlight nodes in sequence + type console lines
 const seq = [
-  { node: 'nStart',    log: () => `<span class="k">[INICIO]</span> sistema iniciado` },
-  { node: 'nProcess',  log: () => `<span class="k">[PROCESSO]</span> ideia = <span class="v">gerar_novidade()</span>` },
-  { node: 'nDecision', log: () => `<span class="k">[DECISÃO]</span> pronto_para_lançar? → <span class="v">FALSO</span>` },
-  { node: 'nIoFalse',  log: () => `<span class="k">[ESCREVA]</span> "ainda não, mas em breve 🚀"` },
+  { node: 'nStart',    log: () => `<span class="k">[INICIO]</span> aula de lógica iniciada` },
+  { node: 'nProcess',  log: () => `<span class="k">[PROCESSO]</span> conceito = <span class="v">"estruturas de repetição"</span>` },
+  { node: 'nDecision', log: () => `<span class="k">[DECISÃO]</span> aluno_entendeu_o_conceito? → <span class="v">FALSO</span>` },
+  { node: 'nIoFalse',  log: () => `<span class="k">[ESCREVA]</span> "vamos revisar juntos! 📘"` },
 ];
 
 let step = 0;
